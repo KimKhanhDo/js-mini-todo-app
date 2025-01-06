@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Todo App</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <main>
+            <!-- Page heading -->
+            <h1 class="page-heading">Create your Todo-List</h1>
+
+            <!-- Form -->
+            <form action="" id="todo-form" class="todo-form">
+                <input
+                    type="text"
+                    id="todo-input"
+                    class="input"
+                    placeholder="What are your tasks for today?"
+                    spellcheck="false"
+                />
+                <button id="submit" class="submit-btn" onmousedown="event.preventDefault()">Add</button>
+            </form>
+
+            <!-- Task list -->
+            <ul id="task-list" class="task-list">
+                <!-- Task item -->
+                <!-- <li class="empty-message">No tasks available</li> -->
+            </ul>
+        </main>
+        <script src="main.js"></script>
+    </body>
+</html>
