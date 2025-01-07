@@ -1,12 +1,19 @@
-const tasks = [
-    { title: 'Design a website', completed: true },
-    { title: 'Learn JavaScript', completed: false },
-    { title: 'Build a Todo App', completed: true },
-];
+/**
+ * Sample data
+{ title: 'Design a website', completed: true },
+{ title: 'Learn JavaScript', completed: false },
+{ title: 'Build a Todo App', completed: true },
+ */
+
+const tasks = JSON.parse(localStorage.getItem('tasks')) ?? [];
 
 const taskList = document.querySelector('#task-list');
 const todoForm = document.querySelector('#todo-form');
 const todoInput = document.querySelector('#todo-input');
+
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 function handleTaskActions(e) {
     const taskItem = e.target.closest('.task-item');
@@ -23,17 +30,20 @@ function handleTaskActions(e) {
 
         task.title = newTitle;
         renderTasks();
+        saveTasks();
     }
 
     if (e.target.closest('.done')) {
         task.completed = !task.completed;
         renderTasks();
+        saveTasks();
     }
 
     if (e.target.closest('.delete')) {
         if (confirm(`Are you sure you want to delete "${task.title}?"`)) {
             tasks.splice(taskIndex, 1);
             renderTasks();
+            saveTasks();
         }
     }
 }
@@ -55,11 +65,12 @@ function addNewTask(e) {
 
     const newTask = {
         title: value,
-        complete: false,
+        completed: false,
     };
 
     tasks.push(newTask);
     renderTasks();
+    saveTasks();
     todoInput.value = '';
 }
 
