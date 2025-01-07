@@ -5,6 +5,24 @@ const tasks = [
 ];
 
 const taskList = document.querySelector('#task-list');
+const todoForm = document.querySelector('#todo-form');
+const todoInput = document.querySelector('#todo-input');
+
+function addNewTask(e) {
+    e.preventDefault();
+
+    const value = todoInput.value.trim();
+    if (!value) return alert('Please write something!');
+
+    const newTask = {
+        title: value,
+        complete: false,
+    };
+
+    tasks.push(newTask);
+    renderTasks();
+    todoInput.value = '';
+}
 
 function renderTasks() {
     const liItems = tasks
@@ -25,4 +43,6 @@ function renderTasks() {
     taskList.innerHTML = liItems;
 }
 
+// todoForm.addEventListener('submit', handleTaskAction);
+todoForm.addEventListener('submit', addTask);
 renderTasks();
