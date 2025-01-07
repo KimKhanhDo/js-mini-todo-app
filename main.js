@@ -15,6 +15,12 @@ function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+function escapeHTML(value) {
+    const div = document.createElement('div');
+    div.innerText = value;
+    return div.innerHTML;
+}
+
 function handleTaskActions(e) {
     const taskItem = e.target.closest('.task-item');
     if (!taskItem) return;
@@ -89,7 +95,7 @@ function renderTasks() {
             (task, index) =>
                 `
     <li class="task-item ${task.completed ? 'completed' : ''}" data-index='${index}'>
-    <span class="task-title">${task.title}</span>
+    <span class="task-title">${escapeHTML(task.title)}</span>
     <div class="task-action">
         <button class="task-btn edit">Edit</button>
         <button class="task-btn done">${task.completed ? 'Mark as undone' : 'Done'}</button>
