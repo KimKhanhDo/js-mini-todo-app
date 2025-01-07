@@ -1,7 +1,7 @@
 const tasks = [
-    { title: 'Design a website', completed: true },
-    { title: 'Learn JavaScript', completed: false },
-    { title: 'Build a Todo App', completed: true },
+    // { title: 'Design a website', completed: true },
+    // { title: 'Learn JavaScript', completed: false },
+    // { title: 'Build a Todo App', completed: true },
 ];
 
 const taskList = document.querySelector('#task-list');
@@ -49,6 +49,12 @@ function addNewTask(e) {
 }
 
 function renderTasks() {
+    if (!tasks.length) {
+        const message = `<li class="empty-message">No tasks available</li>`;
+        taskList.innerHTML = message;
+        return;
+    }
+
     const liItems = tasks
         .map(
             (task, index) =>
