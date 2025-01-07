@@ -19,11 +19,7 @@ function handleTaskActions(e) {
 
         if (newTitle === null) return;
         if (!newTitle) return alert('Title can not be empty');
-
-        const isDuplicate = tasks.some(
-            (task, currentIndex) => task.title.toLowerCase() === newTitle.toLowerCase() && currentIndex !== taskIndex
-        );
-        if (isDuplicate) return alert('Title is duplicate');
+        if (isDuplicateTask(newTitle, taskIndex)) return alert('Title is duplicate');
 
         task.title = newTitle;
         renderTasks();
@@ -42,14 +38,20 @@ function handleTaskActions(e) {
     }
 }
 
+function isDuplicateTask(newTitle, taskIndex = -1) {
+    const isDuplicate = tasks.some(
+        (task, index) => task.title.toLowerCase() === newTitle.toLowerCase() && taskIndex !== index
+    );
+    return isDuplicate;
+}
+
 function addNewTask(e) {
     e.preventDefault();
 
     const value = todoInput.value.trim();
     if (!value) return alert('Please write something!');
 
-    const isDuplicate = tasks.some((task) => task.title.toLowerCase() === value.toLowerCase());
-    if (isDuplicate) return alert('Title is duplicate');
+    if (isDuplicateTask(value)) return alert('Title is duplicate');
 
     const newTask = {
         title: value,
