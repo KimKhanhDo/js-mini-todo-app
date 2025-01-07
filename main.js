@@ -1,7 +1,7 @@
 const tasks = [
-    // { title: 'Design a website', completed: true },
-    // { title: 'Learn JavaScript', completed: false },
-    // { title: 'Build a Todo App', completed: true },
+    { title: 'Design a website', completed: true },
+    { title: 'Learn JavaScript', completed: false },
+    { title: 'Build a Todo App', completed: true },
 ];
 
 const taskList = document.querySelector('#task-list');
@@ -14,7 +14,12 @@ function handleTaskActions(e) {
     const task = tasks[taskIndex];
 
     if (e.target.closest('.edit')) {
-        const newTitle = prompt('Enter new task title:', task.title);
+        let newTitle = prompt('Enter new task title:', task.title);
+        newTitle = newTitle.trim();
+
+        if (newTitle === null) return;
+        if (!newTitle) return alert('Title can not be empty');
+
         task.title = newTitle;
         renderTasks();
     }
