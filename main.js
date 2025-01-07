@@ -18,11 +18,17 @@ function handleTaskActions(e) {
         task.title = newTitle;
         renderTasks();
     }
+
     if (e.target.closest('.done')) {
-        console.log('Done');
+        task.completed = !task.completed;
+        renderTasks();
     }
+
     if (e.target.closest('.delete')) {
-        console.log('Delete');
+        if (confirm(`Are you sure you want to delete "${task.title}?"`)) {
+            tasks.splice(taskIndex, 1);
+            renderTasks();
+        }
     }
 }
 
@@ -51,7 +57,7 @@ function renderTasks() {
     <span class="task-title">${task.title}</span>
     <div class="task-action">
         <button class="task-btn edit">Edit</button>
-        <button class="task-btn done">${task.complete ? 'Mark as undone' : 'Done'}</button>
+        <button class="task-btn done">${task.completed ? 'Mark as undone' : 'Done'}</button>
         <button class="task-btn delete">Delete</button>
     </div>
 </li>
